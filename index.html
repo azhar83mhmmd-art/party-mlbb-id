@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Party ID — Join Grup Mobile Legends</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚔️</text></svg>" />
+</head>
+<body>
+
+  <!-- Background particles -->
+  <div class="bg-overlay"></div>
+  <canvas id="particles"></canvas>
+
+  <!-- HERO HEADER -->
+  <header class="hero">
+    <div class="hero-badge">⚔️ MOBILE LEGENDS</div>
+    <h1 class="hero-title">PARTY <span class="accent">ID</span></h1>
+    <p class="hero-sub">Bergabung bersama squad terbaik. Raih victory bersama kami.</p>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num" id="counter-members">0</span><span class="stat-label">Member Aktif</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><span class="stat-num">24/7</span><span class="stat-label">Party Available</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><span class="stat-num">Top</span><span class="stat-label">Mythic Rank</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><span class="stat-num" id="counter-winrate">0</span><span class="stat-label">Win Rate %</span></div>
+    </div>
+    <!-- Feature Badges -->
+    <div class="feature-badges">
+      <span class="fbadge">🏆 Ranked Party</span>
+      <span class="fbadge">🎯 Classic & Draft</span>
+      <span class="fbadge">🤝 Cari Duo / Squad</span>
+      <span class="fbadge">📢 Info Update ML</span>
+    </div>
+  </header>
+
+  <!-- INFO SECTION -->
+  <section class="info-section">
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card-icon">🎮</div>
+        <div class="info-card-body">
+          <h3>Semua Rank Diterima</h3>
+          <p>Dari Epic hingga Mythical Immortal, semua rank disambut. Kami percaya setiap player punya potensi!</p>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">🌍</div>
+        <div class="info-card-body">
+          <h3>Seluruh Indonesia</h3>
+          <p>Member kami tersebar dari Sabang sampai Merauke. Temukan teman main dari kotamu!</p>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">🔒</div>
+        <div class="info-card-body">
+          <h3>Komunitas Aman</h3>
+          <p>Admin aktif 24 jam. Toxic player langsung di-kick. Lingkungan gaming yang sehat & positif.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN FORM SECTION -->
+  <main class="main-container">
+
+    <!-- STEP INDICATOR -->
+    <div class="steps-bar">
+      <div class="step active" id="step-ind-1">
+        <div class="step-circle">1</div>
+        <span>Kontak</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" id="step-ind-2">
+        <div class="step-circle">2</div>
+        <span>Role</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" id="step-ind-3">
+        <div class="step-circle">3</div>
+        <span>Biodata</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" id="step-ind-4">
+        <div class="step-circle">4</div>
+        <span>Aturan</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" id="step-ind-5">
+        <div class="step-circle">5</div>
+        <span>Bergabung</span>
+      </div>
+    </div>
+
+    <div class="form-card" id="form-card">
+
+      <!-- ==================== STEP 1: NOMOR WA ==================== -->
+      <div class="form-step active" id="step-1">
+        <div class="step-header">
+          <div class="step-icon">📱</div>
+          <h2>Nomor WhatsApp</h2>
+          <p>Masukkan nomor WhatsApp aktif kamu untuk konfirmasi oleh admin.</p>
+        </div>
+        <div class="input-group">
+          <label>Nomor WhatsApp <span class="required">*</span></label>
+          <div class="input-prefix-wrap">
+            <span class="input-prefix">+62</span>
+            <input type="tel" id="wa-number" placeholder="8xx xxxx xxxx" maxlength="13" />
+          </div>
+          <div class="input-hint">Contoh: 8123456789 (tanpa angka 0 di depan)</div>
+        </div>
+        <button class="btn-next" onclick="nextStep(1)">Lanjutkan <span class="btn-arrow">→</span></button>
+      </div>
+
+      <!-- ==================== STEP 2: PILIH ROLE ==================== -->
+      <div class="form-step" id="step-2">
+        <div class="step-header">
+          <div class="step-icon">🎮</div>
+          <h2>Pilih Role</h2>
+          <p>Pilih role yang kamu kuasai. Bisa pilih lebih dari satu.</p>
+        </div>
+        <div class="role-grid" id="role-grid">
+          <div class="role-card" data-role="Roamer" onclick="toggleRole(this)">
+            <div class="role-emoji">🛡️</div>
+            <div class="role-name">Roamer</div>
+            <div class="role-desc">Tank / Support</div>
+            <div class="role-check">✓</div>
+          </div>
+          <div class="role-card" data-role="Gold Lane" onclick="toggleRole(this)">
+            <div class="role-emoji">⚔️</div>
+            <div class="role-name">Gold Lane</div>
+            <div class="role-desc">Marksman / Mage</div>
+            <div class="role-check">✓</div>
+          </div>
+          <div class="role-card" data-role="EXP Lane" onclick="toggleRole(this)">
+            <div class="role-emoji">💪</div>
+            <div class="role-name">EXP Lane</div>
+            <div class="role-desc">Fighter / Assassin</div>
+            <div class="role-check">✓</div>
+          </div>
+          <div class="role-card" data-role="Mid Lane" onclick="toggleRole(this)">
+            <div class="role-emoji">✨</div>
+            <div class="role-name">Mid Lane</div>
+            <div class="role-desc">Mage / Assassin</div>
+            <div class="role-check">✓</div>
+          </div>
+          <div class="role-card" data-role="Jungler" onclick="toggleRole(this)">
+            <div class="role-emoji">🗡️</div>
+            <div class="role-name">Jungler</div>
+            <div class="role-desc">Assassin / Fighter</div>
+            <div class="role-check">✓</div>
+          </div>
+          <div class="role-card" data-role="Hyper" onclick="toggleRole(this)">
+            <div class="role-emoji">⚡</div>
+            <div class="role-name">Hyper</div>
+            <div class="role-desc">All Role Carry</div>
+            <div class="role-check">✓</div>
+          </div>
+        </div>
+        <div class="selected-roles-display" id="selected-roles-display"></div>
+        <div class="btn-row">
+          <button class="btn-back" onclick="prevStep(2)">← Kembali</button>
+          <button class="btn-next" onclick="nextStep(2)">Lanjutkan <span class="btn-arrow">→</span></button>
+        </div>
+      </div>
+
+      <!-- ==================== STEP 3: BIODATA ==================== -->
+      <div class="form-step" id="step-3">
+        <div class="step-header">
+          <div class="step-icon">👤</div>
+          <h2>Biodata Kamu</h2>
+          <p>Isi data diri dan informasi akun ML kamu.</p>
+        </div>
+        <div class="input-group">
+          <label>Nama / Nickname <span class="required">*</span></label>
+          <input type="text" id="nama" placeholder="Nama atau nickname kamu" />
+        </div>
+        <div class="input-row">
+          <div class="input-group">
+            <label>Usia <span class="required">*</span></label>
+            <input type="number" id="usia" placeholder="Usia" min="10" max="60" />
+          </div>
+          <div class="input-group">
+            <label>Jenis Kelamin <span class="required">*</span></label>
+            <select id="gender">
+              <option value="">Pilih...</option>
+              <option value="Laki-laki">Laki-laki</option>
+              <option value="Perempuan">Perempuan</option>
+            </select>
+          </div>
+        </div>
+        <div class="input-group">
+          <label>ID In-Game (ML) <span class="required">*</span></label>
+          <input type="text" id="ml-id" placeholder="Opsional" />
+        </div>
+        <div class="input-row">
+          <div class="input-group">
+            <label>Rank Sekarang <span class="required">*</span></label>
+            <select id="rank">
+              <option value="">Pilih Rank...</option>
+              <option value="Warrior">⚔️ Warrior</option>
+              <option value="Elite">🔵 Elite</option>
+              <option value="Master">🟣 Master</option>
+              <option value="Grandmaster">🟤 Grandmaster</option>
+              <option value="Epic">🟠 Epic</option>
+              <option value="Legend">🟡 Legend</option>
+              <option value="Mythic">💎 Mythic</option>
+              <option value="Mythical Glory">👑 Mythical Glory</option>
+              <option value="Mythical Immortal">🔥 Mythical Immortal</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label>Server</label>
+            <select id="server">
+              <option value="Indonesia">🇮🇩 Indonesia</option>
+              <option value="Malaysia">🇲🇾 Malaysia</option>
+              <option value="Internasional">🌐 Internasional</option>
+            </select>
+          </div>
+        </div>
+        <div class="input-row">
+          <div class="input-group">
+            <label>Kota <span class="required">*</span></label>
+            <input type="text" id="kota" placeholder="Contoh: Banjarmasin, Surabaya" />
+          </div>
+          <div class="input-group">
+            <label>Provinsi <span class="required">*</span></label>
+            <select id="provinsi">
+              <option value="">Pilih Provinsi...</option>
+              <option>Aceh</option><option>Sumatera Utara</option><option>Sumatera Barat</option>
+              <option>Riau</option><option>Kepulauan Riau</option><option>Jambi</option>
+              <option>Bengkulu</option><option>Sumatera Selatan</option><option>Kepulauan Bangka Belitung</option>
+              <option>Lampung</option><option>Banten</option><option>DKI Jakarta</option>
+              <option>Jawa Barat</option><option>Jawa Tengah</option><option>DI Yogyakarta</option>
+              <option>Jawa Timur</option><option>Bali</option><option>Nusa Tenggara Barat</option>
+              <option>Nusa Tenggara Timur</option><option>Kalimantan Barat</option>
+              <option>Kalimantan Tengah</option><option>Kalimantan Selatan</option>
+              <option>Kalimantan Timur</option><option>Kalimantan Utara</option>
+              <option>Sulawesi Utara</option><option>Gorontalo</option><option>Sulawesi Tengah</option>
+              <option>Sulawesi Barat</option><option>Sulawesi Selatan</option><option>Sulawesi Tenggara</option>
+              <option>Maluku</option><option>Maluku Utara</option>
+              <option>Papua Barat</option><option>Papua</option><option>Papua Tengah</option>
+              <option>Papua Pegunungan</option><option>Papua Selatan</option>
+            </select>
+          </div>
+        </div>
+        <!-- Gaya Main -->
+        <div class="input-group">
+          <label>Gaya Bermain</label>
+          <div class="playstyle-grid" id="playstyle-grid">
+            <div class="playstyle-chip" data-style="Aggressive" onclick="togglePlaystyle(this)">🔥 Aggressive</div>
+            <div class="playstyle-chip" data-style="Support" onclick="togglePlaystyle(this)">💚 Support</div>
+            <div class="playstyle-chip" data-style="Farming" onclick="togglePlaystyle(this)">🌾 Farming</div>
+            <div class="playstyle-chip" data-style="Objective" onclick="togglePlaystyle(this)">🏰 Objective</div>
+            <div class="playstyle-chip" data-style="Roaming" onclick="togglePlaystyle(this)">🌀 Roaming</div>
+            <div class="playstyle-chip" data-style="Carry" onclick="togglePlaystyle(this)">⚡ Carry</div>
+          </div>
+        </div>
+        <!-- Jadwal Main -->
+        <div class="input-group">
+          <label>Jadwal Main Favorit</label>
+          <div class="schedule-grid" id="schedule-grid">
+            <div class="schedule-chip" data-sched="Pagi (06-12)" onclick="toggleSchedule(this)">🌅 Pagi</div>
+            <div class="schedule-chip" data-sched="Siang (12-17)" onclick="toggleSchedule(this)">☀️ Siang</div>
+            <div class="schedule-chip" data-sched="Sore (17-20)" onclick="toggleSchedule(this)">🌆 Sore</div>
+            <div class="schedule-chip" data-sched="Malam (20-24)" onclick="toggleSchedule(this)">🌙 Malam</div>
+            <div class="schedule-chip" data-sched="Dini Hari" onclick="toggleSchedule(this)">🌃 Dini Hari</div>
+          </div>
+        </div>
+        <div class="fun-tip">
+          <span class="fun-tip-icon">💡</span>
+          <span>Tips: Isi jadwal main agar admin bisa mencocokkan kamu dengan squad yang aktif di waktu yang sama!</span>
+        </div>
+        <div class="btn-row">
+          <button class="btn-back" onclick="prevStep(3)">← Kembali</button>
+          <button class="btn-next" onclick="nextStep(3)">Lanjutkan <span class="btn-arrow">→</span></button>
+        </div>
+      </div>
+
+      <!-- ==================== STEP 4: ATURAN GRUP ==================== -->
+      <div class="form-step" id="step-4">
+        <div class="step-header">
+          <div class="step-icon">📜</div>
+          <h2>Aturan Grup</h2>
+          <p>Baca dan pahami aturan grup sebelum bergabung.</p>
+        </div>
+        <div class="rules-container">
+          <div class="rule-item">
+            <div class="rule-num">01</div>
+            <div class="rule-text">
+              <strong>Saling Menghormati</strong>
+              Dilarang menghina, merendahkan, atau berkata kasar kepada sesama member grup.
+            </div>
+          </div>
+          <div class="rule-item">
+            <div class="rule-num">02</div>
+            <div class="rule-text">
+              <strong>Sportifitas</strong>
+              Dilarang menyalahkan rekan satu tim. Evaluasi bersama dengan sikap positif.
+            </div>
+          </div>
+          <div class="rule-item">
+            <div class="rule-num">03</div>
+            <div class="rule-text">
+              <strong>Aktif & Responsif</strong>
+              Member diharapkan aktif dalam grup dan merespons ajakan party dengan sopan.
+            </div>
+          </div>
+          <div class="rule-item">
+            <div class="rule-num">04</div>
+            <div class="rule-text">
+              <strong>Koordinasi</strong>
+              Gunakan voice chat saat bermain ranked. Komunikasi adalah kunci kemenangan.
+            </div>
+          </div>
+          <div class="rule-item">
+            <div class="rule-num">05</div>
+            <div class="rule-text">
+              <strong>Dilarang Spam & Promosi</strong>
+              Dilarang melakukan spam chat atau mempromosikan produk/grup lain tanpa izin admin.
+            </div>
+          </div>
+          <div class="rule-item">
+            <div class="rule-num">06</div>
+            <div class="rule-text">
+              <strong>Ketidakaktifan</strong>
+              Member yang tidak aktif selama 30 hari tanpa konfirmasi akan dikeluarkan dari grup.
+            </div>
+          </div>
+          <div class="rule-item">
+            <div class="rule-num">07</div>
+            <div class="rule-text">
+              <strong>Keputusan Admin</strong>
+              Keputusan admin bersifat final. Kritik dan saran disampaikan dengan sopan ke admin.
+            </div>
+          </div>
+        </div>
+        <div class="agree-box">
+          <label class="checkbox-label">
+            <input type="checkbox" id="agree-rules" />
+            <span class="custom-checkbox"></span>
+            <span>Saya telah membaca dan <strong>menyetujui</strong> semua aturan grup di atas.</span>
+          </label>
+        </div>
+        <div class="btn-row">
+          <button class="btn-back" onclick="prevStep(4)">← Kembali</button>
+          <button class="btn-next" onclick="nextStep(4)">Lanjutkan <span class="btn-arrow">→</span></button>
+        </div>
+      </div>
+
+      <!-- ==================== STEP 5: LINK GRUP ==================== -->
+      <div class="form-step" id="step-5">
+        <div class="step-header">
+          <div class="step-icon">🚀</div>
+          <h2>Bergabung ke Grup</h2>
+          <p>Kamu hampir selesai! Klik tombol di bawah untuk bergabung ke grup WhatsApp Party ID.</p>
+        </div>
+
+        <!-- Live member badge -->
+        <div class="live-badge">
+          <span class="live-dot"></span>
+          <span id="live-text">🟢 <strong>23 orang</strong> bergabung hari ini</span>
+        </div>
+
+        <div class="summary-card">
+          <div class="summary-title">📋 Ringkasan Data Kamu</div>
+          <div id="summary-content"></div>
+        </div>
+
+        <div class="join-card">
+          <div class="join-icon">💬</div>
+          <div class="join-text">
+            <strong>Grup WhatsApp Party ID</strong>
+            <span>Klik tombol bergabung lalu kembali ke halaman ini</span>
+          </div>
+        </div>
+
+        <a href="https://chat.whatsapp.com/GRaZysNCGfx05cFx3PekbZ?mode=gi_t" 
+           target="_blank" 
+           class="btn-join" 
+           id="btn-join-group"
+           onclick="onGroupJoin()">
+          <span class="btn-join-icon">🟢</span>
+          Bergabung ke Grup Party ID
+        </a>
+
+        <div class="btn-row" style="margin-top: 16px;">
+          <button class="btn-back" onclick="prevStep(5)">← Kembali</button>
+        </div>
+
+        <!-- Admin Contact -->
+        <div class="admin-section">
+          <div class="admin-divider"><span>atau</span></div>
+          <p class="admin-label">Butuh bantuan? Hubungi admin langsung</p>
+          <button class="btn-admin" id="btn-admin" onclick="contactAdmin()">
+            <span>💬</span> Hubungi Admin via WhatsApp
+          </button>
+          <div class="admin-note">Admin akan membalas dalam waktu <strong>1×24 jam</strong></div>
+        </div>
+      </div>
+
+    </div><!-- end form-card -->
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-logo">PARTY <span class="accent">ID</span></div>
+    <p class="footer-tagline">Komunitas Mobile Legends Bang Bang Indonesia</p>
+    <div class="footer-links">
+      <a href="https://chat.whatsapp.com/GRaZysNCGfx05cFx3PekbZ?mode=gi_t" target="_blank">💬 Grup WA</a>
+      <span>·</span>
+      <a href="javascript:void(0)" onclick="contactAdmin()">📞 Hubungi Admin</a>
+    </div>
+    <p>© 2025 <strong>Party ID</strong> — Situs ini tidak berafiliasi dengan Moonton</p>
+  </footer>
+
+  <!-- POPUP: Terima Kasih -->
+  <div class="popup-overlay" id="popup-overlay">
+    <div class="popup-box" id="popup-box">
+      <div class="popup-animation">
+        <div class="popup-rings">
+          <div class="ring r1"></div>
+          <div class="ring r2"></div>
+          <div class="ring r3"></div>
+        </div>
+        <div class="popup-icon">🎉</div>
+      </div>
+      <h2 class="popup-title">Terima Kasih!</h2>
+      <p class="popup-msg">Kamu telah berhasil bergabung ke</p>
+      <p class="popup-group-name">Grup Party ID</p>
+      <p class="popup-sub">Harap tunggu hingga admin mengkonfirmasi keanggotaan kamu. Admin akan menghubungi kamu melalui WhatsApp yang telah kamu daftarkan.</p>
+      <div class="popup-info">
+        <span class="popup-info-icon">⏳</span>
+        <span>Konfirmasi biasanya dalam <strong>1×24 jam</strong></span>
+      </div>
+      <button class="popup-close" onclick="closePopup()">Oke, Mengerti!</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
